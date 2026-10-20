@@ -2,72 +2,80 @@
 
 **Understand the patterns behind your decisions.**
 
-MINDFRAME is a learning-first full-stack project for a behavioral self-reflection assessment. Its results will come from a deterministic, documented scoring engine. They are product language for reflection, not a psychological diagnosis or scientifically validated measurement.
+MINDFRAME is a behavioral self-reflection assessment. It translates a person's answers into six decision-making dimensions and a set of archetype affinities. Results are intended as prompts for reflection, not as psychological diagnoses or scientifically validated measurements.
 
-## Project status
+## Features
 
-Milestone 2 is in progress: establishing the Next.js foundation, development checks, design tokens, and project structure. Assessment questions, scoring, database access, authentication, and AI reports are not implemented yet. The planned AI-assisted insight report is a separate future milestone; it will not participate in assessment scoring.
+- 24-question assessment covering planning, reasoning, exploration, execution, risk approach, and social approach.
+- Deterministic, server-side scoring. The same valid answers always produce the same result.
+- Six archetype affinities, with a neutral **Balanced profile** when answers do not strongly match one archetype.
+- PostgreSQL persistence through Neon, with versioned migrations and versioned assessment/scoring data.
+- UUID-based result links. The public result response includes scores and archetype affinities, but omits individual answers and internal database IDs.
+- Responsive assessment and result pages.
+
+## Technology
+
+- Next.js, React, and TypeScript
+- Neon serverless PostgreSQL
+- Vitest for unit tests
 
 ## Run locally
 
-Prerequisites: Node.js 24 (or a compatible supported Node version) and npm.
+### Requirements
+
+- Node.js and npm
+- A Neon PostgreSQL database
+
+### Setup
 
 ```powershell
 npm ci
+Copy-Item .env.example .env.local
+```
+
+Add your Neon connection string to `.env.local`:
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
+```
+
+Keep `.env.local` private. It is excluded from Git.
+
+Create the database tables and start the development server:
+
+```powershell
+npm run db:migrate
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Stop the development server with `Ctrl+C`.
+Open [http://localhost:3000](http://localhost:3000).
 
-In this Windows workspace, Next.js's native SWC compiler binary does not load. The project runs Next through `scripts/next.mjs`, which directs the compiler cache to the writable `work/next-swc` folder. `next.config.ts` selects Webpack and a single build worker because Next.js requires native SWC bindings for Turbopack.
+## Available commands
 
-Useful checks:
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run db:migrate` | Apply database migrations |
+| `npm run typecheck` | Check TypeScript types |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run unit tests |
+| `npm run build` | Create a production build |
 
-```powershell
-npm run typecheck
-npm run lint
-npm test
-npm run build
-```
+## Architecture
 
-`typecheck` asks TypeScript to find type errors. `lint` checks code patterns. Vitest will run focused unit tests as project logic is added. Next.js’s build checks whether the app can be prepared for production. These commands are explained and introduced as they become relevant; they are not interchangeable.
+- `src/lib/assessment/v1.ts` contains the versioned questions and answer weights.
+- `src/lib/scoring/score-assessment.ts` implements the deterministic scoring rules independently of the UI and database.
+- `src/app/api/assessments/submit/route.ts` validates submitted answers and calculates scores on the server.
+- `src/lib/db/` contains the Neon database access and result persistence code.
+- `src/app/api/results/[publicId]/route.ts` retrieves the public fields for a share link.
+- `db/migrations/` contains the PostgreSQL schema migrations.
 
-## Planned project structure
+## Privacy and limitations
 
-```text
-src/
-  app/                    Pages, layouts, and Route Handlers
-  components/              Shared interface components
-  features/assessment/     Assessment UI and flow
-  data/                    Versioned question and archetype definitions
-  lib/scoring/             Framework-independent scoring functions
-  server/                  Validation, database, and auth-only modules
-tests/
-  integration/             API and persistence checks
-  e2e/                     Browser user journeys
-docs/
-  learning-checklist.md    Learning progress and practice goals
-  decisions/               Important architecture decisions
-```
+The result link is public to anyone who has it. The results API intentionally excludes the original answers, but account ownership and result deletion are not currently available. Avoid including identifying information in assessment responses, and share result links only with people you choose.
 
-Folders will be introduced as the project needs them; the scoring engine will stay independent from React and database code.
+The scoring model and assessment content are product drafts for reflection. They are not clinical or diagnostic tools. An optional AI-assisted insight report is a possible future enhancement; it is not part of the current scoring or results flow.
 
-## Milestones
+## Project status
 
-1. Blueprint and approval — complete.
-2. Project foundation — in progress.
-3. Assessment definitions and deterministic scoring.
-4. PostgreSQL schema, migrations, and backend APIs.
-5. Assessment and results interface.
-6. End-to-end integration and shareable results.
-7. Optional Google sign-in.
-8. Quality review and deployment preparation.
-9. Optional AI-assisted insight reports, proposed after the core application and tests are complete.
-
-## Learning approach
-
-Each major milestone will include a small project-specific exercise for you to attempt, review of your implementation, an explanation of important data flow and design choices, and a short understanding check before moving on. The [learning checklist](docs/learning-checklist.md) records what you have practised and what remains to learn.
-
-## Environment variables
-
-No database or authentication credentials are needed for the current foundation. Later milestones will add a placeholder-only `.env.example` and document each variable before connecting external services. Never commit real credentials.
+The assessment, deterministic scoring, Neon persistence, and shareable result pages are implemented and working locally. Production deployment is the next milestone.
