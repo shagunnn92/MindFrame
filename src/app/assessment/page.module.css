@@ -1,0 +1,391 @@
+.page {
+  width: min(1120px, calc(100% - 48px));
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.mark {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.message {
+  width: min(650px, 100%);
+  margin: clamp(90px, 18vh, 170px) auto 0;
+  padding: 36px;
+  border: 1px solid var(--color-border);
+  background: linear-gradient(140deg, rgba(99, 215, 230, 0.045), transparent 60%);
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.message h1 {
+  margin-top: 24px;
+  font-size: clamp(32px, 6vw, 54px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.description {
+  margin-top: 18px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 27px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 34px;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+
+.backLink:hover,
+.wordmark:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.backLink:focus-visible,
+.wordmark:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.flow {
+  width: min(760px, 100%);
+  margin: clamp(64px, 12vh, 112px) auto 72px;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(140deg, rgba(99, 215, 230, 0.045), transparent 60%);
+}
+
+.progressHeader,
+.resultLabel,
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.progressCount {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.progressCount span {
+  color: var(--color-text);
+}
+
+.dimensionTag {
+  padding: 8px 11px;
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.progressTrack {
+  height: 3px;
+  margin-top: 24px;
+  background: var(--color-border);
+}
+
+.progressTrack span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 180ms ease;
+}
+
+.title {
+  max-width: 650px;
+  margin-top: 38px;
+  font-size: clamp(28px, 5vw, 43px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 600px;
+  margin-top: 16px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+  border: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.option:hover,
+.optionSelected {
+  border-color: var(--color-accent);
+  background: rgba(99, 215, 230, 0.06);
+  color: var(--color-text);
+}
+
+.option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.option:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.optionMarker {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  place-items: center;
+  border: 1px solid #52616a;
+  border-radius: 50%;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.optionSelected .optionMarker {
+  border: 6px solid var(--color-accent);
+}
+
+.navigation {
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.primaryButton,
+.backButton {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 18px;
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 150ms ease, color 150ms ease, opacity 150ms ease;
+}
+
+.primaryButton {
+  background: var(--color-accent);
+  color: #071014;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: var(--color-accent-strong);
+}
+
+.primaryButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.backButton {
+  margin-right: auto;
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.backButton:hover:not(:disabled) {
+  color: var(--color-text);
+}
+
+.backButton:disabled {
+  visibility: hidden;
+}
+
+.primaryButton:focus-visible,
+.backButton:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.privacyNote {
+  margin-top: 22px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.errorMessage {
+  margin-top: 20px;
+  color: #ffb0a8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.shareActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.results {
+  display: grid;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.resultLabel {
+  margin-bottom: 8px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.resultLabel span:last-child {
+  color: var(--color-text);
+}
+
+.scoreTrack {
+  position: relative;
+  height: 8px;
+  background: var(--color-border);
+}
+
+.scoreCenter {
+  position: absolute;
+  z-index: 1;
+  top: -3px;
+  left: 50%;
+  width: 1px;
+  height: 14px;
+  background: var(--color-text-muted);
+}
+
+.scoreFill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--color-accent);
+}
+
+.scoreNegative {
+  right: 50%;
+  background: #9aa8bd;
+}
+
+.scorePositive {
+  left: 50%;
+}
+
+.poleLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  color: var(--color-text-muted);
+  font-size: 10px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 600px) {
+  .page {
+    width: min(100% - 36px, 540px);
+  }
+
+  .message {
+    padding: 25px 20px;
+  }
+
+  .flow {
+    margin-top: 54px;
+    padding: 23px 18px;
+  }
+
+  .dimensionTag {
+    max-width: 110px;
+    text-align: center;
+  }
+
+  .option {
+    padding: 11px 12px;
+  }
+
+  .poleLabels {
+    font-size: 9px;
+  }
+
+  .shareActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
