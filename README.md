@@ -2,6 +2,8 @@
 
 **Understand the patterns behind your decisions.**
 
+**Live demo:** [mind-frame-navy.vercel.app](https://mind-frame-navy.vercel.app)
+
 MINDFRAME is a behavioral self-reflection assessment. It translates a person's answers into six decision-making dimensions and a set of archetype affinities. Results are intended as prompts for reflection, not as psychological diagnoses or scientifically validated measurements.
 
 ## Features
@@ -78,4 +80,4 @@ The scoring model and assessment content are product drafts for reflection. They
 
 ## Project status
 
-The assessment, deterministic scoring, Neon persistence, and shareable result pages are implemented and working locally. Production deployment is the next milestone.
+The assessment, deterministic scoring, Neon persistence, and shareable result pages are deployed. Production assessment submission and saved-result retrieval have been verified.
